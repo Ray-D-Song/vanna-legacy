@@ -35,6 +35,13 @@ Session 通过响应中的 `session_id` 或 Header `X-Session-ID` 传递。
 ## 构建
 
 ```bash
-cd go
+make build        # 生成 ./vanna
+make dev          # go run 启动服务（默认 config.yaml）
+make build-demo   # 构建并运行 demo 占位程序
+```
+
+或手动：
+
+```bash
 go build -o vanna ./cmd/vanna
 ```
