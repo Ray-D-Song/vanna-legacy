@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/vanna-ai/vanna/docs/go-rewrite/chart-spec.schema.json",
+  "title": "ChartSpec",
+  "description": "声明式图表配置。由 LLM 或规则引擎生成，前端转换为 ECharts option 渲染。",
+  "type": "object",
+  "required": ["type"],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["bar", "line", "scatter", "pie", "metric", "table"],
+      "description": "图表类型。table 表示仅展示表格、不渲染 ECharts。"
+    },
+    "title": {
+      "type": "string",
+      "description": "图表标题"
+    },
+    "x": {
+      "$ref": "#/$defs/fieldRef",
+      "description": "X 轴 / 分类维度字段"
+    },
+    "y": {
+      "$ref": "#/$defs/fieldRef",
+      "description": "Y 轴 / 数值字段"
+    },
+    "series": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/fieldRef" },
+      "description": "多系列时的数值字段列表"
+    },
+    "group_by": {
+      "type": "string",
+      "description": "分组字段名"
+    },
+    "sort": {
+      "type": "object",
+      "required": ["field", "order"],
+      "properties": {
+        "field": { "type": "string" },
+        "order": { "type": "string", "enum": ["asc", "desc"] }
+      }
+    },
+    "limit": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "展示的最大行数（如 Top N）"
+    },
+    "stacked": {
+      "type": "boolean",
+      "default": false
+    },
+    "value_field": {
+      "type": "string",
+      "description": "metric 类型的单值字段"
+    },
+    "value_label": {
+      "type": "string",
+      "description": "metric 类型的展示标签"
+    }
+  },
+  "$defs": {
+    "fieldRef": {
+      "type": "object",
+      "required": ["field"],
+      "properties": {
+        "field": { "type": "string" },
+        "label": { "type": "string" }
+      }
+    }
+  },
+  "examples": [
+    {
+      "type": "bar",
+      "title": "销售额前 10 客户",
+      "x": { "field": "customer_name", "label": "客户" },
+      "y": { "field": "total_sales", "label": "销售额" },
+      "sort": { "field": "total_sales", "order": "desc" },
+      "limit": 10
+    },
+    {
+      "type": "metric",
+      "title": "总销售额",
+      "value_field": "total_sales",
+      "value_label": "销售额"
+    }
+  ]
+}

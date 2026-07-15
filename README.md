@@ -264,6 +264,10 @@ Vanna is designed to connect to any database, LLM, and vector database. There's 
 
 https://github.com/vanna-ai/vanna/assets/7146154/eb90ee1e-aa05-4740-891a-4fc10e611cab
 
+## Go rewrite (in progress)
+
+Planning documents for the Go reimplementation live in [docs/go-rewrite/](docs/go-rewrite/). See [P0-PLAN.md](docs/go-rewrite/P0-PLAN.md) for architecture, API scope, and implementation order.
+
 ## More resources
  - [Full Documentation](https://vanna.ai/docs/)
  - [Website](https://vanna.ai)
