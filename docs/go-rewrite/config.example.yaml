@@ -1,0 +1,41 @@
+# Vanna Go — 示例配置（实现阶段将移至 go/config.example.yaml）
+
+server:
+  addr: ":8080"
+  session_ttl: 30m
+
+# 统一 OpenAI 兼容配置；llm / embedding 可单独覆盖 base_url 与 api_key
+openai:
+  base_url: https://api.openai.com/v1
+  api_key: ${OPENAI_API_KEY}
+
+llm:
+  base_url: ""
+  api_key: ""
+  model: gpt-4o
+  temperature: 0.7
+  max_tokens: 14000
+
+embedding:
+  base_url: ""
+  api_key: ""
+  model: text-embedding-3-small
+  dimension: 1536
+
+vector:
+  path: ./data/chromem
+  n_results:
+    ddl: 10
+    documentation: 10
+    sql: 10
+
+database:
+  driver: mysql
+  dsn: "user:password@tcp(127.0.0.1:3306)/mydb?parseTime=true"
+  dialect: ""
+
+engine:
+  allow_llm_to_see_data: false
+  auto_train: true
+  visualize: true
+  language: ""
